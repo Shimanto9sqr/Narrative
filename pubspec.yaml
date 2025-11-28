@@ -1,0 +1,47 @@
+name: narrative
+description: A personalized news feed application using MVVM architecture
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State Management
+  provider: ^6.1.1
+
+  # Firebase Authentication
+  firebase_core: ^2.24.2
+  firebase_auth: ^4.16.0
+
+  # HTTP requests for NewsAPI
+  http: ^1.1.2
+
+  # Local Database
+  sqflite: ^2.3.0
+  path_provider: ^2.1.1
+  path: ^1.8.3
+
+  # JSON serialization
+  json_annotation: ^4.8.1
+
+  # UI
+  cached_network_image: ^3.3.0
+  intl: ^0.18.1
+  url_launcher: ^6.2.2
+
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.0
+  build_runner: ^2.4.7
+  json_serializable: ^6.7.1
+
+flutter:
+  uses-material-design: true
