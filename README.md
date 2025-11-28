@@ -1,7 +1,7 @@
 # Narrative - Personalized News Feed
 A modern mobile news aggregator built with Flutter, focused on delivering a personalized, category-based news feed. It employs the MVVM (Model-View-ViewModel) architecture, leverages Firebase Authentication for user management, and uses NewsAPI as the primary data source.
 
-## ✨ Features
+## Features
 
 * **Personalized News Feed:** Dynamically filters and displays news articles based on categories selected by the user (e.g., Technology, Sports).
 * **Firebase authentication:** Detailed forecast view to help users plan ahead.
@@ -10,7 +10,7 @@ A modern mobile news aggregator built with Flutter, focused on delivering a pers
 * **State Management:** Utilizes **Provider** for robust and efficient state handling.
 * **Daily sync:** The news feed refreshes daily or upon app open to ensure the latest articles are presented.
 
-## 🧱 Architecture Overview
+## Architecture Overview
 
 The project is structured following the MVVM pattern for clear separation of concerns:
 
@@ -21,7 +21,7 @@ The project is structured following the MVVM pattern for clear separation of con
 | **ViewModel** | Business logic, state management, and interaction with the Repository. | `lib/viewmodels/` |
 | **Data** | API communication, authentication, and storage logic. | `lib/services/` |
 
-## 🚀 Getting Started
+## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
@@ -54,7 +54,7 @@ These instructions will get you a copy of the project up and running on your loc
     flutter run
     ```
 
-## ⚙️ Key Dependencies
+## Key Dependencies
 
 | Package | Purpose |
 | :--- | :--- |
