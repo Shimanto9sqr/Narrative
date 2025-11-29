@@ -1,4 +1,6 @@
 # Narrative - Personalized News Feed
+<img width="96" height="96" alt="ic_launcher" src="https://github.com/user-attachments/assets/6a8b6528-2479-4882-bc4b-2c3f2f02c201" />
+
 A modern mobile news aggregator built with Flutter, focused on delivering a personalized, category-based news feed. It employs the MVVM (Model-View-ViewModel) architecture, leverages Firebase Authentication for user management, and uses NewsAPI as the primary data source.
 
 ## Features
@@ -9,6 +11,13 @@ A modern mobile news aggregator built with Flutter, focused on delivering a pers
 * **Persistent preference:** User-selected categories are stored locally using sqflite for fast access and retention.
 * **State Management:** Utilizes **Provider** for robust and efficient state handling.
 * **Daily sync:** The news feed refreshes daily or upon app open to ensure the latest articles are presented.
+
+## Appdemo
+
+
+https://github.com/user-attachments/assets/2b934c65-abc4-4d48-bc0b-3104c8a6fe54
+
+
 
 ## Architecture Overview
 
