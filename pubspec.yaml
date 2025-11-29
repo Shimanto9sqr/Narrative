@@ -9,25 +9,19 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
   # State Management
   provider: ^6.1.1
-
   # Firebase Authentication
   firebase_core: ^2.24.2
   firebase_auth: ^4.16.0
-
   # HTTP requests for NewsAPI
   http: ^1.1.2
-
   # Local Database
   sqflite: ^2.3.0
   path_provider: ^2.1.1
   path: ^1.8.3
-
   # JSON serialization
   json_annotation: ^4.8.1
-
   # UI
   cached_network_image: ^3.3.0
   intl: ^0.18.1

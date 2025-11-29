@@ -6,8 +6,8 @@ import 'package:narrative/services/news_api_service.dart';
 import 'package:narrative/services/local_db_service.dart';
 import 'package:narrative/viewmodels/auth_viewmodel.dart';
 import 'package:narrative/viewmodels/news_viewmodel.dart';
-import 'views/login_screen.dart';
-import 'views/news_feed_screen.dart';
+import 'package:narrative/views/login_screen.dart';
+import 'package:narrative/views/news_feed_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,11 +16,10 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     final authService = AuthService();
     final newsApiService = NewsApiService();
     final localDbService = LocalDbService();
@@ -30,7 +29,6 @@ class MyApp extends StatelessWidget {
         Provider<AuthService>.value(value: authService),
         Provider<NewsApiService>.value(value: newsApiService),
         Provider<LocalDbService>.value(value: localDbService),
-
         ChangeNotifierProvider<AuthViewModel>(
           create: (_) => AuthViewModel(
             authService: authService,
@@ -45,7 +43,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Personalized News Feed',
+        title: 'News Feed',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
@@ -83,6 +81,10 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
+        // Use builder to ensure clean navigation on auth state changes
+        builder: (context, child) {
+          return child ?? const SizedBox.shrink();
+        },
         home: const AuthWrapper(),
       ),
     );
@@ -96,6 +98,7 @@ class AuthWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AuthViewModel>(
       builder: (context, authViewModel, child) {
+        // Show appropriate screen based on authentication state
         if (authViewModel.isLoggedIn) {
           return const NewsFeedScreen();
         } else {

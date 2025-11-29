@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:narrative/viewmodels/auth_viewmodel.dart';
 import 'package:narrative/viewmodels/news_viewmodel.dart';
 import 'package:narrative/models/user_preference_model.dart';
-import 'package:narrative/views/news_feed_screen.dart';
+import 'news_feed_screen.dart';
 
 class PreferencesScreen extends StatefulWidget {
   const PreferencesScreen({super.key});
@@ -20,7 +20,9 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
   @override
   void initState() {
     super.initState();
-    _loadExistingPreferences();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loadExistingPreferences();
+    });
   }
 
   Future<void> _loadExistingPreferences() async {
@@ -30,7 +32,7 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
     if (authViewModel.userId != null) {
       await newsFeedViewModel.loadUserPreferences(authViewModel.userId!);
 
-      if (newsFeedViewModel.userPreferences != null) {
+      if (newsFeedViewModel.userPreferences != null && mounted) {
         setState(() {
           _selectedCategories.addAll(
             newsFeedViewModel.userPreferences!.selectedCategories,
@@ -39,9 +41,11 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
       }
     }
 
-    setState(() {
-      _isInitialized = true;
-    });
+    if (mounted) {
+      setState(() {
+        _isInitialized = true;
+      });
+    }
   }
 
   void _toggleCategory(String category) {
@@ -82,6 +86,7 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
           ),
         );
 
+        // Navigate to news feed
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => const NewsFeedScreen()),
         );
@@ -100,21 +105,6 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Select Your Interests'),
-        actions: [
-          Consumer<AuthViewModel>(
-            builder: (context, authViewModel, child) {
-              return IconButton(
-                icon: const Icon(Icons.logout),
-                onPressed: () async {
-                  await authViewModel.signOut();
-                  if (context.mounted) {
-                    Navigator.of(context).pop();
-                  }
-                },
-              );
-            },
-          ),
-        ],
       ),
       body: Consumer<NewsFeedViewModel>(
         builder: (context, newsFeedViewModel, child) {
@@ -140,6 +130,7 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
                   ],
                 ),
               ),
+
               Expanded(
                 child: GridView.builder(
                   padding: const EdgeInsets.all(16),

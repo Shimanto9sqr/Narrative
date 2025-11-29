@@ -1,6 +1,6 @@
 
 class AppConstants {
-  static const String newsApiKey = 'YOUR_NEWS_API_KEY_HERE';
+  static const String newsApiKey = '50e3b52262d84a2ea17d1d9d0c6977ae';
   static const String newsApiBaseUrl = 'https://newsapi.org/v2';
 
   static const String dbName = 'news_app.db';

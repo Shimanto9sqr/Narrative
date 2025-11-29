@@ -102,15 +102,13 @@ class AuthViewModel extends ChangeNotifier {
   }
 
   Future<void> signOut() async {
-    _setLoading(true);
     try {
       await _authService.signOut();
       _currentUser = null;
-      _setSuccess('Signed out successfully');
-      _setLoading(false);
+      clearMessages();
+      notifyListeners();
     } catch (e) {
       _setError('Error signing out: $e');
-      _setLoading(false);
     }
   }
 
@@ -137,7 +135,6 @@ class AuthViewModel extends ChangeNotifier {
       if (_currentUser != null) {
         await _localDbService.deleteUserPreferences(_currentUser!.uid);
       }
-
       await _authService.deleteAccount();
       _currentUser = null;
       _setSuccess('Account deleted successfully');
@@ -149,7 +146,7 @@ class AuthViewModel extends ChangeNotifier {
       return false;
     }
   }
-  
+
   @override
   void dispose() {
     super.dispose();

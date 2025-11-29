@@ -18,6 +18,16 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _obscurePassword = true;
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        context.read<AuthViewModel>().clearMessages();
+      }
+    });
+  }
+
+  @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
@@ -25,6 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _toggleMode() {
+    context.read<AuthViewModel>().clearMessages();
     setState(() {
       _isLoginMode = !_isLoginMode;
     });
@@ -47,7 +58,8 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     if (success && mounted) {
-      // Navigate to preferences screen after successful login/registration
+      _emailController.clear();
+      _passwordController.clear();
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => const PreferencesScreen()),
       );
@@ -74,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 24),
                     Text(
-                      _isLoginMode ? 'Welcome Back' : 'Create Account',
+                      _isLoginMode ? 'Welcome to Narrative' : 'Create Account',
                       style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
